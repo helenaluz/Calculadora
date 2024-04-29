@@ -5,8 +5,8 @@ import Filla01.FilaVetor;
 public class Main {
     public static void main(String[] args) {
         Calculadora c = new Calculadora();
-        FilaVetor<String> fila =  c.extrairTermos(" (25 + 10) / 3,5");
-        System.out.println(fila.toString());
-        System.out.println(fila.peek());
+        FilaVetor<String> fila =  c.extrairTermos("(5+6)*(3+3)*(32)");
+        FilaVetor<String> filaPosFixada  = c.gerarEsprPosfixada(fila);
+        System.out.println("Resultado: "+c.calcularExprPosfixada(filaPosFixada));
     }
 }

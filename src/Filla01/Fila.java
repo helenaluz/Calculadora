@@ -4,6 +4,6 @@ public interface Fila<T> {
     public void inserir (T valor);
     public boolean estavazia();
     public T peek();
-    public void  retirar();
+    public T  retirar();
     public void liberar();
 }

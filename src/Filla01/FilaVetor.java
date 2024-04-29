@@ -28,20 +28,21 @@ public class FilaVetor<T> implements  Fila{
         return tamanho == 0;
     }
     @Override
-    public Object peek() {
+    public T peek() {
         if(estavazia()) {
             throw new RuntimeException("Fila está vazia");
         }
-        return info[inicio];
+        return (T)  info[inicio];
     }
     @Override
-    public void retirar() {
+    public T retirar() {
         if(estavazia()) {
             throw new RuntimeException("Fila está vazia");
         }
-        Object valor = peek();
+        T valor = peek();
         inicio = (inicio+1)%limite;
         tamanho--;
+        return valor;
     }
     @Override
     public void liberar() {
