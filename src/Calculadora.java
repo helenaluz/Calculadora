@@ -6,11 +6,16 @@ public class Calculadora {
         FilaVetor<String> fila = new FilaVetor<>(expressao.length());
 
         expressao = expressao.replaceAll("\\s", "");
+        expressao = expressao.replace(",", ".");
 
         StringBuilder termoAtual = new StringBuilder();
 
-        for (char caractere : expressao.toCharArray()) {
-            if (isOperador(caractere) || caractere == '(' || caractere == ')') {
+        for (int i = 0; i < expressao.length(); i++) {
+            char caractere = expressao.charAt(i);
+
+            if (caractere == '-' && (i == 0 || isOperador(expressao.charAt(i - 1)) || expressao.charAt(i - 1) == '(')) {
+                termoAtual.append(caractere);
+            } else if (isOperador(caractere) || caractere == '(' || caractere == ')') {
                 if (termoAtual.length() > 0) {
                     fila.inserir(termoAtual.toString());
                     termoAtual.setLength(0);
@@ -60,7 +65,7 @@ public class Calculadora {
         return filaC;
     }
 
-    public double calcularExprPosfixada(FilaVetor<String> exprPosfixada) {
+    public String calcularExprPosfixada(FilaVetor<String> exprPosfixada) {
         PilhaVetor<Double> pilhaAuxiliar = new PilhaVetor<>(exprPosfixada.getLimite());
 
         while (!exprPosfixada.estavazia()) {
@@ -76,7 +81,7 @@ public class Calculadora {
             }
         }
 
-        return pilhaAuxiliar.pop();
+        return pilhaAuxiliar.pop().toString().replace(".", ",");
     }
 
     private double aplicarOperador(double operand1, double operand2, String operador) {
@@ -121,11 +126,4 @@ public class Calculadora {
     private boolean isOperador(char caractere) {
         return caractere == '+' || caractere == '-' || caractere == '*' || caractere == '/';
     }
-
-    private boolean isOperador(String caractere) {
-        return caractere == "+" || caractere == "-" || caractere == "*" || caractere == "/";
-    }
-
-
-
 }
