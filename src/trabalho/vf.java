@@ -1,33 +1,36 @@
+package trabalho;
+
+import trabalho.Filla01.Fila;
+import trabalho.Filla01.FilaVetor;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class vf extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton btCalcular;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField tfExpressao;
+    private JTextField tfResultado;
+    private JPanel Calculadora;
 
     public vf() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btCalcular);
 
-        buttonOK.addActionListener(new ActionListener() {
+        btCalcular.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
         });
-
-        // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -36,19 +39,16 @@ public class vf extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        trabalho.Calculadora c = new Calculadora();
+        Fila<String> termoInfixada =  c.extrairTermos(tfExpressao.getText());
+        Fila<String> termosPosfixada = c.gerarExprPosfixada((FilaVetor<String>) termoInfixada);
+        double resultado = c.calcularExprPosfixada((FilaVetor<String>) termosPosfixada);
+        tfResultado.setText(Double.toString(resultado).replace(".", ","));
     }
+
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
-    public static void main(String[] args) {
-        vf dialog = new vf();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

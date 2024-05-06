@@ -1,4 +1,4 @@
-package Filla01;
+package trabalho.Filla01;
 public interface Fila<T> {
 
     public void inserir (T valor);

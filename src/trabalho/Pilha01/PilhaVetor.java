@@ -1,4 +1,4 @@
-package Pilha01;
+package trabalho.Pilha01;
 
 import java.util.Arrays;
 

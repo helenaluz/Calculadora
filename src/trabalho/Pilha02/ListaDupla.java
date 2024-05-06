@@ -1,4 +1,4 @@
-package Pilha02;
+package trabalho.Pilha02;
 
 public class ListaDupla<T> {
     private NoListaDupla<T> primeiro;

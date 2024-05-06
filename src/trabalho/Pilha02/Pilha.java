@@ -1,4 +1,4 @@
-package Pilha02;
+package trabalho.Pilha02;
 
 public interface Pilha<T> {
     public void push(T info);

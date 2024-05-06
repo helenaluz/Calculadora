@@ -1,5 +1,4 @@
-package Filla01;
-import java.util.Arrays;
+package trabalho.Filla01;
 
 public class FilaVetor<T> implements  Fila{
     private Object[] info;

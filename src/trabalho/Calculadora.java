@@ -1,5 +1,7 @@
-import Filla01.*;
-import Pilha01.PilhaVetor;
+package trabalho;
+
+import trabalho.Filla01.*;
+import trabalho.Pilha01.PilhaVetor;
 
 public class Calculadora {
     public FilaVetor<String> extrairTermos(String expressao) {
@@ -13,9 +15,9 @@ public class Calculadora {
         for (int i = 0; i < expressao.length(); i++) {
             char caractere = expressao.charAt(i);
 
-            if (caractere == '-' && (i == 0 || isOperador(expressao.charAt(i - 1)) || expressao.charAt(i - 1) == '(')) {
+            if (caractere == '-' && (i == 0 || Operador(expressao.charAt(i - 1)) || expressao.charAt(i - 1) == '(')) {
                 termoAtual.append(caractere);
-            } else if (isOperador(caractere) || caractere == '(' || caractere == ')') {
+            } else if (Operador(caractere) || caractere == '(' || caractere == ')') {
                 if (termoAtual.length() > 0) {
                     fila.inserir(termoAtual.toString());
                     termoAtual.setLength(0);
@@ -33,7 +35,7 @@ public class Calculadora {
         return fila;
     }
 
-    public FilaVetor<String> gerarEsprPosfixada(FilaVetor<String> esprInfixada) {
+    public FilaVetor<String> gerarExprPosfixada(FilaVetor<String> esprInfixada) {
         FilaVetor<String> filaC = new FilaVetor<>(esprInfixada.getLimite());
         PilhaVetor<String> pilhaB = new PilhaVetor<>(esprInfixada.getLimite());
 
@@ -65,7 +67,7 @@ public class Calculadora {
         return filaC;
     }
 
-    public String calcularExprPosfixada(FilaVetor<String> exprPosfixada) {
+    public double calcularExprPosfixada(FilaVetor<String> exprPosfixada) {
         PilhaVetor<Double> pilhaAuxiliar = new PilhaVetor<>(exprPosfixada.getLimite());
 
         while (!exprPosfixada.estavazia()) {
@@ -81,7 +83,7 @@ public class Calculadora {
             }
         }
 
-        return pilhaAuxiliar.pop().toString().replace(".", ",");
+        return pilhaAuxiliar.pop();
     }
 
     private double aplicarOperador(double operand1, double operand2, String operador) {
@@ -123,7 +125,7 @@ public class Calculadora {
         }
     }
 
-    private boolean isOperador(char caractere) {
+    private boolean Operador(char caractere) {
         return caractere == '+' || caractere == '-' || caractere == '*' || caractere == '/';
     }
 }
